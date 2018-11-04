@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Weather</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        const weatherData = {
+            tempUnit: 'C',
+            windSpeedUnit: 'm/s',
+            days: [
+                { day: 'Mon', temp: 22, windDirection: 'north-east', windSpeed: 10, type: 'sunny' },
+                { day: 'Tue', temp: 14, windDirection: 'north-west', windSpeed: 14, type: 'rainy' },
+                { day: 'Wed', temp: 17, windDirection: 'south-east', windSpeed: 20, type: 'cloudy' },
+                { day: 'Thu', temp: 10, windDirection: 'north-east', windSpeed: 15, type: 'sunny' },
+                { day: 'Fri', temp: 25, windDirection: 'south-east', windSpeed: 10, type: 'sunny' },
+                { day: 'Sat', temp: 15, windDirection: 'north-east', windSpeed: 11, type: 'rainy' },
+                { day: 'Sun', temp: 12, windDirection: 'north-west', windSpeed: 09, type: 'sunny' },
+            ]
+        }
+        function toString(s) {
+            switch (s) {
+                case 0:
+                    day = "Monday";
+                    temp = weatherData.days[0].temp;
+                    windDirection = weatherData.days[0].windDirection;
+                    windSpeed = weatherData.days[0].windSpeed;
+                    type = weatherData.days[0].type;
+                    break;
+                case 1:
+                    day = "Tuesday";
+                    temp = weatherData.days[1].temp;
+                    windDirection = weatherData.days[1].windDirection;
+                    windSpeed = weatherData.days[1].windSpeed;
+                    type = weatherData.days[1].type;
+                    break;
+                case 2:
+                    day = "Wednesday";
+                    temp = weatherData.days[2].temp;
+                    windDirection = weatherData.days[2].windDirection;
+                    windSpeed = weatherData.days[2].windSpeed;
+                    type = weatherData.days[2].type;
+                    break;
+                case 3:
+                    day = "Thursday";
+                    temp = weatherData.days[3].temp;
+                    windDirection = weatherData.days[3].windDirection;
+                    windSpeed = weatherData.days[3].windSpeed;
+                    type = weatherData.days[3].type;
+                    break;
+                case 4:
+                    day = "Friday";
+                    temp = weatherData.days[4].temp;
+                    windDirection = weatherData.days[4].windDirection;
+                    windSpeed = weatherData.days[4].windSpeed;
+                    type = weatherData.days[4].type;
+                    break;
+                case 5:
+                    day = "Saturday";
+                    temp = weatherData.days[5].temp;
+                    windDirection = weatherData.days[5].windDirection;
+                    windSpeed = weatherData.days[5].windSpeed;
+                    type = weatherData.days[5].type;
+                    break;
+                case 6:
+                    day = "Sunday";
+                    temp = weatherData.days[6].temp;
+                    windDirection = weatherData.days[6].windDirection;
+                    windSpeed = weatherData.days[6].windSpeed;
+                    type = weatherData.days[6].type;
+            }
+            document.getElementById("day").innerHTML = day;
+            document.getElementById("temp").innerHTML = temp;
+            document.getElementById("wd").innerHTML = windDirection;
+            document.getElementById("ws").innerHTML = windSpeed;
+            document.getElementById("type").innerHTML = type;
+            document.getElementById("tempUnit").innerHTML = weatherData.tempUnit;
+            document.getElementById("wsUnit").innerHTML = weatherData.windSpeedUnit;
+            arrows(windDirection);
+
+        }
+
+        function convertToKelvin() {
+            if (weatherData.tempUnit != "K") {
+                x = document.getElementsByTagName("span")[0].innerHTML;
+                document.getElementById("temp").innerHTML = x * 1 + 273;
+                document.getElementById("tempUnit").innerHTML = "K";
+                for (i = 0; i < 7; i++) {
+                    weatherData.days[i].temp += 273;
+                }
+                weatherData.tempUnit = "K";
+            }
+        }
+        function convertToCelsius() {
+            if (weatherData.tempUnit != "C") {
+                x = document.getElementsByTagName("span")[0].innerHTML;
+                document.getElementById("temp").innerHTML = x * 1 - 273;
+                document.getElementById("tempUnit").innerHTML = "C";
+                for (i = 0; i < 7; i++) {
+                    weatherData.days[i].temp -= 273;
+                }
+                weatherData.tempUnit = "C";
+            }
+        }
+        function convertToKM() {
+            if (weatherData.windSpeedUnit != "km/h") {
+                x = document.getElementsByTagName('span')[3].innerHTML;
+                document.getElementById("ws").innerHTML = x * 3.6;
+                document.getElementById("wsUnit").innerHTML = "km/h";
+                for (i = 0; i < 7; i++) {
+                    weatherData.days[i].windSpeed *= 3.6;
+                }
+                weatherData.windSpeedUnit = "km/h";
+            }
+        }
+
+        function convertToM() {
+            if (weatherData.windSpeedUnit != "m/s") {
+                x = document.getElementsByTagName("span")[3].innerHTML;
+                document.getElementById("ws").innerHTML = x / 3.6;
+               document.getElementById("wsUnit").innerHTML = "m/s";
+                for (i = 0; i < 7; i++) {
+                    weatherData.days[i].windSpeed /= 3.6;
+                }
+                weatherData.windSpeedUnit = "m/s";
+            }
+        }
+
+        function arrows(windDirection) {
+            switch (windDirection) {
+                case "north":
+                    arrow = "&#8593"
+                    break;
+                case "east":
+                    arrow = "&#8594"
+                    break;
+                case "south":
+                    arrow = "&#8595"
+                    break;
+                case "west":
+                    arrow = "&#8592"
+                    break;
+                case "north-west":
+                    arrow = "&#8598"
+                    break;
+                case "north-east":
+                    arrow = "&#8599"
+                    break;
+                case "south-east":
+                    arrow = "&#8600"
+                    break;
+                case "south-west":
+                    arrow = "&#8561"
+                    break;
+            }
+            document.getElementById("arrow").innerHTML = arrow;
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0px;
+            background: url(pozadina.jpeg);
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .topNavigation {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topNavigation a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .topNavigation a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .info {
+            margin-left: 10%;
+            font-style: italic;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1 style="font-size:50px;">weather</h1>
+    </div>
+
+    <div class="topNavigation">
+        <a href="javascript:toString(0)">Monday</a>
+        <a href="javascript:toString(1)">Tuesday</a>
+        <a href="javascript:toString(2)">Wednesday</a>
+        <a href="javascript:toString(3)">Thursday</a>
+        <a href="javascript:toString(4)">Friday</a>
+        <a href="javascript:toString(5)">Saturday</a>
+        <a href="javascript:toString(6)">Sunday</a>
+    </div>
+
+    <div class="topNavigation">
+        <a href="javascript:convertToKelvin()">Kelvin</a>
+        <a href="javascript:convertToCelsius()">Celsius</a>
+    </div>
+    <div class="topNavigation">
+        <a href="javascript:convertToKM()">km/h</a>
+        <a href="javascript:convertToM()">m/s</a>
+    </div>
+    <div class="info">
+        <p id='day' style="font-size: 49px; margin-left: 5%;"></p>
+        <span id='temp'></span> &nbsp;
+        <span id="tempUnit"></span>
+        <br>
+        <br>
+        <span id='wd'></span>&nbsp;
+        <span id='ws'></span> &nbsp;
+        <span id="wsUnit"></span> &nbsp;
+        <span id="arrow"></span>
+        <p id='type'></p>
+
+    </div>
+
+</body>
+
+</html>
